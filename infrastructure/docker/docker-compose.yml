@@ -1,0 +1,62 @@
+# Horizon Hope Academy — Local Development Stack
+# Port remapping: system postgres=5432, system redis=6379
+# Docker postgres=5433, Docker redis=6380 (external only)
+services:
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: hha_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: hhacademy
+      POSTGRES_PASSWORD: hhacademy_dev_password
+      POSTGRES_DB: horizon_hope_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hhacademy -d horizon_hope_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: hha_redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --requirepass "redis_dev_password"
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6380:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "redis_dev_password", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ../../backend
+      dockerfile: Dockerfile
+    container_name: hha_backend
+    restart: unless-stopped
+    env_file:
+      - ../../backend/.env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://hhacademy:hhacademy_dev_password@postgres:5432/horizon_hope_db
+      REDIS_URL: redis://:redis_dev_password@redis:6379/0
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ../../backend/app:/app/app
+
+volumes:
+  postgres_data:
+  redis_data:
