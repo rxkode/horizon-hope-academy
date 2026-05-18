@@ -1,3 +1,24 @@
+import withPWA from 'next-pwa';
+
+const pwaConfig = withPWA({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === 'development',
+  runtimeCaching: [
+    {
+      urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+      handler: 'CacheFirst',
+      options: { cacheName: 'google-fonts', expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 * 24 * 365 } },
+    },
+    {
+      urlPattern: /\/api\/v1\/(health|admissions|contact)/,
+      handler: 'NetworkFirst',
+      options: { cacheName: 'api-cache', networkTimeoutSeconds: 10 },
+    },
+  ],
+});
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -6,8 +27,7 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 86400,
   },
-  // Compress all assets
   compress: true,
 };
 
-module.exports = nextConfig;
+export default pwaConfig(nextConfig);

@@ -1,8 +1,8 @@
-# Horizon Hope Academy — Local Development Stack
-# Port remapping: system postgres=5432, system redis=6379
-# Docker postgres=5433, Docker redis=6380 (external only)
+# Horizon Hope Academy — Full Ecosystem Docker Compose
+# Ports: postgres=5433, redis=6380, backend=8000, portal=8080
 services:
 
+  # ── Main PostgreSQL (backend API) ─────────────────────────
   postgres:
     image: postgres:16-alpine
     container_name: hha_postgres
@@ -13,6 +13,7 @@ services:
       POSTGRES_DB: horizon_hope_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./init-scripts/01-schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
     ports:
       - "5433:5432"
     healthcheck:
@@ -21,6 +22,26 @@ services:
       timeout: 5s
       retries: 5
 
+  # ── RosarioSIS PostgreSQL (isolated) ──────────────────────
+  postgres_sis:
+    image: postgres:16-alpine
+    container_name: hha_postgres_sis
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: rosario
+      POSTGRES_PASSWORD: rosario_dev_password
+      POSTGRES_DB: rosariosis_db
+    volumes:
+      - postgres_sis_data:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U rosario -d rosariosis_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Redis ─────────────────────────────────────────────────
   redis:
     image: redis:7-alpine
     container_name: hha_redis
@@ -36,6 +57,7 @@ services:
       timeout: 5s
       retries: 5
 
+  # ── FastAPI Backend ────────────────────────────────────────
   backend:
     build:
       context: ../../backend
@@ -56,7 +78,33 @@ services:
         condition: service_healthy
     volumes:
       - ../../backend/app:/app/app
+      - ../../frontend/public/assets:/app/assets:ro
+
+  # ── RosarioSIS School Portal ───────────────────────────────
+  rosariosis:
+    image: rosariosis/rosariosis:latest
+    container_name: hha_portal
+    restart: unless-stopped
+    environment:
+      ROSARIO_DB_HOST: postgres_sis
+      ROSARIO_DB_PORT: 5432
+      ROSARIO_DB_NAME: rosariosis_db
+      ROSARIO_DB_USER: rosario
+      ROSARIO_DB_PASS: rosario_dev_password
+      ROSARIO_ADMIN_EMAIL: admin@horizonhopeacademy.sc.ke
+      ROSARIO_ADMIN_PASS: HHA_Admin_2025!
+      ROSARIO_SCHOOL_NAME: "Horizon Hope Academy Schools"
+    volumes:
+      - rosario_uploads:/var/www/html/uploads
+      - ../../frontend/public/assets/logo-navbar.png:/var/www/html/assets/logo.png:ro
+    ports:
+      - "8080:80"
+    depends_on:
+      postgres_sis:
+        condition: service_healthy
 
 volumes:
   postgres_data:
+  postgres_sis_data:
   redis_data:
+  rosario_uploads:
