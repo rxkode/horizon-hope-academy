@@ -14,19 +14,23 @@ class Settings(BaseSettings):
         env_file=".env",
         env_file_encoding="utf-8",
         case_sensitive=False,
+        extra="ignore",   # silently ignore POSTGRES_HOST/PORT/USER/PASS/DB legacy vars
     )
 
     # App
     app_name: str = "Horizon Hope Academy API"
-    app_env: str = "development"
-    debug: bool = True
+    app_env:  str = "development"
+    debug:    bool = True
     secret_key: str = "insecure-dev-key-replace-in-prod"
 
-    # CORS — stored as JSON array string, parsed by validator
+    # CORS — may arrive as JSON array string or comma-separated; validator normalises
     allowed_origins: list[str] = ["http://localhost:3000"]
 
-    # Database
-    database_url: str = "postgresql+asyncpg://hhacademy:hhacademy_dev_password@localhost:5433/horizon_hope_db"
+    # Database (full asyncpg URL — the individual POSTGRES_* vars are ignored)
+    database_url: str = (
+        "postgresql+asyncpg://hhacademy:hhacademy_dev_password"
+        "@localhost:5433/horizon_hope_db"
+    )
 
     # Redis
     redis_url: str = "redis://:redis_dev_password@localhost:6380/0"
@@ -41,15 +45,19 @@ class Settings(BaseSettings):
 
     @field_validator("allowed_origins", mode="before")
     @classmethod
-    def parse_origins(cls, v):
-        """Accept both JSON array string and plain string."""
+    def parse_origins(cls, v: object) -> list[str]:
+        """
+        Accept three forms from .env:
+          1. JSON array string : ["http://localhost:3000","https://example.com"]
+          2. Comma-separated   : http://localhost:3000,https://example.com
+          3. Already a list    : passed through unchanged
+        """
         if isinstance(v, str):
             v = v.strip()
             if v.startswith("["):
                 return json.loads(v)
-            # Single URL string — wrap in list
             return [origin.strip() for origin in v.split(",") if origin.strip()]
-        return v
+        return v  # type: ignore[return-value]
 
 
 @lru_cache
