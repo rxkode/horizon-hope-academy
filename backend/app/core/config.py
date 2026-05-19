@@ -4,7 +4,9 @@ Reads from environment variables / .env file.
 Kenya Data Protection Act 2019 — compliant field tagging.
 """
 from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import field_validator
 from functools import lru_cache
+import json
 
 
 class Settings(BaseSettings):
@@ -19,13 +21,15 @@ class Settings(BaseSettings):
     app_env: str = "development"
     debug: bool = True
     secret_key: str = "insecure-dev-key-replace-in-prod"
+
+    # CORS — stored as JSON array string, parsed by validator
     allowed_origins: list[str] = ["http://localhost:3000"]
 
     # Database
-    database_url: str = "postgresql+asyncpg://hhacademy:hhacademy_dev_password@localhost:5432/horizon_hope_db"
+    database_url: str = "postgresql+asyncpg://hhacademy:hhacademy_dev_password@localhost:5433/horizon_hope_db"
 
     # Redis
-    redis_url: str = "redis://localhost:6379/0"
+    redis_url: str = "redis://:redis_dev_password@localhost:6380/0"
 
     # JWT
     algorithm: str = "HS256"
@@ -34,6 +38,18 @@ class Settings(BaseSettings):
     # Kenya DPA 2019 compliance
     data_retention_days: int = 365
     student_data_encrypted: bool = True
+
+    @field_validator("allowed_origins", mode="before")
+    @classmethod
+    def parse_origins(cls, v):
+        """Accept both JSON array string and plain string."""
+        if isinstance(v, str):
+            v = v.strip()
+            if v.startswith("["):
+                return json.loads(v)
+            # Single URL string — wrap in list
+            return [origin.strip() for origin in v.split(",") if origin.strip()]
+        return v
 
 
 @lru_cache
