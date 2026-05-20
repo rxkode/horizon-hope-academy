@@ -71,7 +71,7 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest tests/ -v --tb=short 2>/dev/null || echo "No tests yet — placeholder"
+          pytest tests/ -v --tb=short
         env:
           DATABASE_URL: postgresql+asyncpg://test:test@localhost:5432/test_db
           REDIS_URL: redis://localhost:6379/0
