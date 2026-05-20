@@ -46,7 +46,7 @@ const stats = [
   { num: "80+",     label: "Learners Enrolled" },
   { num: "8+",      label: "Qualified Teachers" },
   { num: "PP1–G9",  label: "Grades Offered" },
-  { num: "Est. 2019", label: "Serving Shamata" },
+  { num: "Est. 1998", label: "Reopened 2025" },
   { num: "100%",    label: "CBC Compliant" },
 ];
 
