@@ -127,7 +127,7 @@ export default function HomePage() {
       {/* ════════════════════════════════════════════════════
           HERO — full-screen with animated background + bento
           ════════════════════════════════════════════════════ */}
-      <section className="relative min-h-screen flex items-center pt-[68px] overflow-hidden">
+      <section className="relative min-h-screen flex items-center pt-[64px] md:pt-[96px] overflow-hidden">
 
         {/* ── Animated background photo slideshow ── */}
         <AnimatePresence mode="wait">
