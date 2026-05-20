@@ -5,83 +5,161 @@ import Link from "next/link";
 import SectionLabel from "@/components/ui/SectionLabel";
 import Button from "@/components/ui/Button";
 
-const f = (delay=0) => ({
-  initial:{opacity:0,y:28},
-  whileInView:{opacity:1,y:0},
-  viewport:{once:true,margin:"-60px"},
-  transition:{duration:0.8,delay,ease:[0.22,1,0.36,1] as [number,number,number,number]},
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 28 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-60px" },
+  transition: { duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] as [number,number,number,number] },
 });
+
+const values = [
+  { icon: "🎯", title: "Our Vision",
+    desc: "To be the leading centre of academic excellence and character formation in Nyandarua County — nurturing confident, compassionate, and competent learners who are prepared for every stage of life." },
+  { icon: "🌱", title: "Our Mission",
+    desc: "To provide a safe, inclusive, and stimulating learning environment where every child is known, valued, and inspired to achieve their personal best through the CBC curriculum and rich co-curricular activities." },
+  { icon: "⭐", title: "Our Motto",
+    desc: "Committed Service to Excellence — these words guide every decision we make, from how we teach in the classroom to how we engage with families and the wider Shamata community." },
+  { icon: "🤝", title: "Our Values",
+    desc: "Integrity, respect, diligence, inclusivity, and community. We believe that character is as important as academic achievement, and we work every day to develop both in equal measure." },
+];
+
+const facilities = [
+  { icon: "🏫", name: "Modern Classrooms",       desc: "Well-lit, ventilated classrooms designed for CBC activity-based learning with a maximum of 25 learners per class." },
+  { icon: "💻", name: "Computer Laboratory",      desc: "Fully equipped ICT lab providing digital literacy skills from an early age, preparing learners for a technology-driven world." },
+  { icon: "📚", name: "Library & Reading Room",   desc: "A growing collection of CBC-aligned books, reference materials, and reading resources available to all learners." },
+  { icon: "🍽️", name: "Dining Hall",              desc: "A clean, spacious dining facility serving nutritious meals. Proper nutrition is foundational to learning and concentration." },
+  { icon: "🌾", name: "School Farm",              desc: "A hands-on agriculture farm where learners grow crops and learn sustainable farming — perfectly suited to our highland Aberdares setting." },
+  { icon: "🚐", name: "School Transport",         desc: "A dedicated school van providing safe, reliable transport for learners across Shamata and the surrounding areas." },
+  { icon: "🏃", name: "Sports Grounds",           desc: "Open grounds for football, netball, athletics, and Taekwondo — supporting physical development and inter-school competitions." },
+  { icon: "🏠", name: "Home Science Room",        desc: "A dedicated space for practical home science lessons covering nutrition, household management, and life skills." },
+];
+
+const timeline = [
+  { year: "1998", event: "Founded",         desc: "Horizon Hope Academy opens its doors in Shamata, beginning its journey of educational service to the community." },
+  { year: "2015", event: "Temporary Pause", desc: "School operations temporarily suspended due to operational challenges." },
+  { year: "2025", event: "Reopened",        desc: "Horizon Hope Academy proudly reopens with a renewed vision, a committed team, and full CBC curriculum from PP1 to Grade 9." },
+  { year: "2025", event: "Growing Strong",  desc: "Enrolment growing steadily across all grades. New facilities added, transport launched, and community partnerships established." },
+];
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen pt-[68px] topo-bg">
-      <div className="absolute inset-0 bg-navy-gradient pointer-events-none" />
-      <div className="relative z-10">
-
-        {/* Hero */}
-        <section className="max-w-7xl mx-auto px-6 lg:px-10 py-20 grid lg:grid-cols-2 gap-14 items-center">
-          <motion.div {...f()}>
-            <SectionLabel>Our Story</SectionLabel>
-            <h1 className="font-serif text-[clamp(2.4rem,4vw,3.6rem)] font-bold mb-5 leading-[1.1]">
-              Born from This Community.<br/>
-              <span className="italic text-gold-light">Built for Its Children.</span>
+    <>
+      {/* ── Hero ── */}
+      <section className="relative py-20 px-4 sm:px-6 lg:px-10 overflow-hidden"
+        style={{ background: "linear-gradient(135deg, #0b1535 0%, #1c3178 50%, #0d1b45 100%)" }}>
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ backgroundImage: "repeating-linear-gradient(-30deg,transparent,transparent 38px,rgba(100,130,210,0.04) 38px,rgba(100,130,210,0.04) 39px)" }} />
+        <div className="relative max-w-7xl mx-auto text-center">
+          <motion.div {...fadeUp()}>
+            <SectionLabel center>About Us</SectionLabel>
+            <h1 className="font-serif font-bold mb-4" style={{ fontSize: "clamp(2.2rem,4vw,3.5rem)" }}>
+              About Horizon Hope Academy
             </h1>
-            <div className="w-10 h-0.5 bg-gradient-to-r from-gold to-transparent rounded mb-5" />
-            <div className="space-y-4 font-sans text-[0.91rem] text-mist/80 font-light leading-[1.87]">
-              <p>Horizon Hope Academy Schools was founded in 2009 by educators from Shamata who believed every child in the Aberdares highlands deserved quality private education — close to home, rooted in local values.</p>
-              <p>We are a fully registered institution and have proudly served this community for over 16 years as a nurturing mixed day school for boys and girls, from Pre-Primary through Junior Secondary (Grade 9).</p>
-              <p>Our main objective has always been to provide quality education to all, guide and counsel our learners, and integrate moral values to produce holistic individuals and reliable citizens from age 3 to 15. We welcome pupils of all backgrounds and denominations.</p>
-            </div>
-            <div className="grid grid-cols-2 gap-3 mt-8">
-              {["❤️ Every child seen & known","📚 CBC excellence","🌿 Proud of our highlands","🤝 Community partnership","🙏 Open to all faiths","🏅 Strong KCPE record"].map(v => (
-                <div key={v} className="flex items-center gap-2 font-sans text-[0.83rem] text-white/82">
-                  <span>{v}</span>
-                </div>
-              ))}
-            </div>
+            <p className="font-sans text-white/65 leading-relaxed max-w-2xl mx-auto mb-8"
+              style={{ fontSize: "clamp(0.9rem,1.5vw,1.05rem)" }}>
+              A proud institution rooted in Shamata, Nyandarua County — at the foot of the beautiful Aberdare Ranges.
+              Originally founded in 1998, we reopened in 2025 with a renewed commitment to excellence, community, and the CBC curriculum.
+            </p>
+            <Link href="/admissions"><Button variant="primary">Join Our School Family →</Button></Link>
           </motion.div>
-          <motion.div {...f(0.2)} className="flex items-center justify-center">
-            <div className="relative w-[300px] h-[300px] md:w-[360px] md:h-[360px] drop-shadow-[0_16px_48px_rgba(196,146,42,0.22)]">
-              <Image src="/assets/logo-official.png" alt="Horizon Hope Academy Schools Official Seal" fill sizes="360px" className="object-contain" />
-            </div>
-          </motion.div>
-        </section>
+        </div>
+      </section>
 
-        {/* Values strip */}
-        <section className="bg-navy-mid border-y border-white/[0.06] py-16 px-6 lg:px-10">
-          <div className="max-w-7xl mx-auto">
-            <motion.div {...f()} className="text-center mb-10">
-              <SectionLabel center>Our Motto</SectionLabel>
-              <h2 className="font-serif text-[clamp(1.8rem,3vw,2.6rem)] font-bold italic text-gold-light">"Committed Service to Excellence"</h2>
-            </motion.div>
-            <div className="grid md:grid-cols-3 gap-5">
-              {[
-                {icon:"🎓",title:"Committed",desc:"We are fully dedicated to every learner's growth — in academics, character, and life skills."},
-                {icon:"🤲",title:"Service",desc:"We serve the Shamata community with humility, partnership, and genuine care for every family."},
-                {icon:"⭐",title:"Excellence",desc:"We set high standards and support every child to reach them — at their own pace, in their own way."},
-              ].map((v,i) => (
-                <motion.div key={v.title} {...f(i*0.1)} className="glass rounded-2xl p-7 text-center hover:border-gold/25 transition-all">
-                  <div className="text-3xl mb-4">{v.icon}</div>
-                  <h3 className="font-serif text-xl font-semibold mb-2">{v.title}</h3>
-                  <p className="font-sans text-sm text-mist/75 leading-relaxed">{v.desc}</p>
+      {/* ── Vision / Mission / Motto / Values ── */}
+      <section className="py-20 px-4 sm:px-6 lg:px-10 bg-navy">
+        <div className="max-w-7xl mx-auto">
+          <motion.div {...fadeUp()} className="text-center mb-12">
+            <SectionLabel center>What Drives Us</SectionLabel>
+            <h2 className="font-serif font-bold" style={{ fontSize: "clamp(1.9rem,3.2vw,2.7rem)" }}>
+              Vision, Mission & Values
+            </h2>
+          </motion.div>
+          <div className="grid sm:grid-cols-2 gap-5">
+            {values.map((v, i) => (
+              <motion.div key={v.title} {...fadeUp(i * 0.1)}
+                className="rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-sm p-7 hover:border-gold/25 hover:bg-white/[0.07] transition-all">
+                <span className="text-[1.8rem] mb-3 block">{v.icon}</span>
+                <h3 className="font-serif text-[1.15rem] font-semibold mb-2 text-gold-light">{v.title}</h3>
+                <p className="font-sans text-[0.85rem] text-white/65 leading-[1.85]">{v.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Our Story / Timeline ── */}
+      <section className="py-20 px-4 sm:px-6 lg:px-10 bg-navy-mid">
+        <div className="max-w-4xl mx-auto">
+          <motion.div {...fadeUp()} className="text-center mb-12">
+            <SectionLabel center>Our Journey</SectionLabel>
+            <h2 className="font-serif font-bold" style={{ fontSize: "clamp(1.9rem,3.2vw,2.7rem)" }}>
+              Our Story
+            </h2>
+          </motion.div>
+          <div className="relative">
+            <div className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-gold/40 via-gold/20 to-transparent" />
+            <div className="space-y-8 pl-16">
+              {timeline.map((t, i) => (
+                <motion.div key={i} {...fadeUp(i * 0.1)} className="relative">
+                  <div className="absolute -left-10 top-1 w-8 h-8 rounded-full bg-gold/20 border border-gold/40 flex items-center justify-center">
+                    <div className="w-2 h-2 rounded-full bg-gold" />
+                  </div>
+                  <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 hover:border-gold/20 transition-all">
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="font-serif text-[1.3rem] font-bold text-gold">{t.year}</span>
+                      <span className="font-sans text-[0.7rem] font-bold tracking-[0.12em] uppercase text-white/40 px-2 py-0.5 rounded-full border border-white/10">{t.event}</span>
+                    </div>
+                    <p className="font-sans text-[0.85rem] text-white/65 leading-relaxed">{t.desc}</p>
+                  </div>
                 </motion.div>
               ))}
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* CTA */}
-        <section className="py-20 px-6 lg:px-10 text-center">
-          <div className="max-w-xl mx-auto">
-            <h2 className="font-serif text-[clamp(1.8rem,3vw,2.4rem)] font-bold mb-4">Ready to Join Our Family?</h2>
-            <p className="font-sans text-sm text-mist/80 mb-8 leading-relaxed">Enrolment is open. Come visit us in Shamata and see what Horizon Hope is all about.</p>
-            <div className="flex gap-4 justify-center flex-wrap">
-              <Link href="/admissions"><Button variant="primary">Apply Now →</Button></Link>
-              <Link href="/contact"><Button variant="outline">Contact Us</Button></Link>
-            </div>
+      {/* ── Facilities ── */}
+      <section id="facilities" className="py-20 px-4 sm:px-6 lg:px-10 bg-navy">
+        <div className="max-w-7xl mx-auto">
+          <motion.div {...fadeUp()} className="text-center mb-12">
+            <SectionLabel center>Our Campus</SectionLabel>
+            <h2 className="font-serif font-bold mb-3" style={{ fontSize: "clamp(1.9rem,3.2vw,2.7rem)" }}>
+              Facilities & Resources
+            </h2>
+            <p className="font-sans text-white/55 max-w-lg mx-auto" style={{ fontSize: "0.9rem" }}>
+              Everything a child needs to learn, grow, and thrive — right here in Shamata.
+            </p>
+          </motion.div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {facilities.map((f, i) => (
+              <motion.div key={f.name} {...fadeUp(i * 0.06)}
+                className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 text-center hover:border-gold/25 hover:-translate-y-1 hover:bg-white/[0.07] transition-all duration-300">
+                <div className="text-[1.8rem] mb-3">{f.icon}</div>
+                <h3 className="font-serif font-semibold text-[0.9rem] mb-1 leading-tight">{f.name}</h3>
+                <p className="font-sans text-[0.72rem] text-white/50 leading-relaxed">{f.desc}</p>
+              </motion.div>
+            ))}
           </div>
-        </section>
-      </div>
-    </div>
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section className="py-16 px-4 sm:px-6 lg:px-10 text-center"
+        style={{ background: "linear-gradient(135deg, #1c3178 0%, #162660 100%)", borderTop: "0.5px solid rgba(255,255,255,0.08)" }}>
+        <div className="max-w-2xl mx-auto">
+          <h2 className="font-serif font-bold mb-3" style={{ fontSize: "clamp(1.7rem,3vw,2.4rem)" }}>
+            Come and See for Yourself
+          </h2>
+          <p className="font-sans text-white/65 mb-8 leading-relaxed" style={{ fontSize: "0.92rem" }}>
+            We warmly invite you to visit our campus in Shamata. Meet our teachers, see our facilities,
+            and feel the Horizon Hope community firsthand.
+          </p>
+          <div className="flex gap-4 justify-center flex-wrap">
+            <Link href="/admissions"><Button variant="primary">Apply for Admission →</Button></Link>
+            <Link href="/contact"><Button variant="outline">📍 Get Directions</Button></Link>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
