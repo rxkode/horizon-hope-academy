@@ -2,21 +2,33 @@ import Image from "next/image";
 import Link from "next/link";
 
 const WHATSAPP = "https://wa.me/254722777384?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20Horizon%20Hope%20Academy.";
-const EMAIL    = "mailto:info@horizonhopeacademy.sc.ke?subject=Enquiry%20—%20Horizon%20Hope%20Academy";
+const EMAIL    = "mailto:info@horizonhopeacademy.sc.ke?subject=Enquiry%20%E2%80%94%20Horizon%20Hope%20Academy";
 
-const schoolLinks     = ["About Us","Our Teachers","CBC Curriculum","School Calendar","School Rules"];
-const admissionLinks  = ["How to Enrol","School Fees","Term Dates","Visit the School","FAQs"];
+const schoolLinks = [
+  { label: "About Us",        href: "/about"             },
+  { label: "CBC Curriculum",  href: "/about#facilities"  },
+  { label: "Our Programmes",  href: "/#programs"         },
+  { label: "Why Choose Us",   href: "/#why"              },
+];
+
+const admissionLinks = [
+  { label: "How to Enrol",    href: "/admissions"        },
+  { label: "School Fees",     href: "/admissions"        },
+  { label: "Visit the School",href: "/contact"           },
+  { label: "FAQs",            href: "/faqs"              },
+];
+
+const quickLinks = [
+  { label: "Home",            href: "/"                  },
+  { label: "Contact Us",      href: "/contact"           },
+  { label: "School Portal",   href: "http://localhost:8080", external: true },
+];
 
 const socials = [
-  { label: "fb", href: "https://facebook.com", title: "Facebook" },
-  {
-    label: "wa",
-    href: WHATSAPP,
-    title: "WhatsApp",
-    isWhatsApp: true,
-  },
-  { label: "yt", href: "https://youtube.com", title: "YouTube" },
-  { label: "𝕏",  href: "https://x.com",       title: "X / Twitter" },
+  { label: "fb", href: "https://facebook.com",  title: "Facebook"  },
+  { label: "wa", href: WHATSAPP,                title: "WhatsApp", isWhatsApp: true },
+  { label: "yt", href: "https://youtube.com",   title: "YouTube"   },
+  { label: "𝕏",  href: "https://x.com",         title: "X / Twitter" },
 ];
 
 export default function Footer() {
@@ -24,29 +36,34 @@ export default function Footer() {
     <footer style={{ background: "#0a1228", borderTop: "0.5px solid rgba(100,130,210,0.1)" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
 
-        {/* Brand */}
+        {/* ── Brand ── */}
         <div>
           <Link href="/" className="flex items-center gap-3 mb-4">
             <div className="relative flex-shrink-0" style={{ width: "40px", height: "40px" }}>
-              <Image src="/assets/logo-navbar.png" alt="Horizon Hope Academy Schools" fill sizes="40px"
+              <Image src="/assets/logo-navbar.png" alt="Horizon Hope Academy" fill sizes="40px"
                 className="object-contain" quality={100} />
             </div>
             <span className="font-serif font-semibold text-white leading-tight" style={{ fontSize: "1rem" }}>
               Horizon Hope<br />
               <span className="font-sans font-normal text-white/40 tracking-widest uppercase" style={{ fontSize: "0.55rem" }}>
-                Academy Schools
+                Academy · Shamata
               </span>
             </span>
           </Link>
           <p className="font-sans font-light leading-relaxed text-white/50 max-w-[240px] mb-5" style={{ fontSize: "0.8rem" }}>
-            A caring private school in Shamata, Aberdares — committed service to excellence since 2009.
+            A caring private school in Shamata, Aberdares — committed service to excellence.
+            Est. 1998 · Proudly reopened 2025.
           </p>
-          {/* Contact details — all linked */}
           <div className="space-y-2 mb-5">
             <a href="tel:+254722777384"
               className="flex items-center gap-2 font-sans text-white/50 hover:text-white transition-colors"
               style={{ fontSize: "0.78rem" }}>
               📞 +254 722 777 384
+            </a>
+            <a href="tel:+254752777384"
+              className="flex items-center gap-2 font-sans text-white/50 hover:text-white transition-colors"
+              style={{ fontSize: "0.78rem" }}>
+              📞 +254 752 777 384
             </a>
             <a href={WHATSAPP} target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-2 font-sans text-green-400/70 hover:text-green-400 transition-colors"
@@ -58,14 +75,10 @@ export default function Footer() {
               style={{ fontSize: "0.78rem" }}>
               ✉️ info@horizonhopeacademy.sc.ke
             </a>
-            <div className="flex items-start gap-2 font-sans text-white/50" style={{ fontSize: "0.78rem" }}>
+            <div className="font-sans text-white/50" style={{ fontSize: "0.78rem" }}>
               📍 Shamata, Nyandarua County, Kenya
             </div>
-            <div className="flex items-start gap-2 font-sans text-white/50" style={{ fontSize: "0.78rem" }}>
-              📮 P.O. Box 20304-4, Kaheho
-            </div>
           </div>
-          {/* Social buttons */}
           <div className="flex gap-2">
             {socials.map(s => (
               <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" title={s.title}
@@ -80,39 +93,57 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* School links */}
+        {/* ── School links ── */}
         <div>
           <h4 className="text-white font-bold tracking-[0.15em] uppercase mb-4 font-sans" style={{ fontSize: "0.64rem" }}>School</h4>
           <ul className="space-y-2">
             {schoolLinks.map(l => (
-              <li key={l}>
-                <Link href="#" className="font-sans text-white/50 hover:text-white transition-colors flex items-center gap-1.5" style={{ fontSize: "0.8rem" }}>
-                  <span className="text-gold text-xs">›</span>{l}
+              <li key={l.label}>
+                <Link href={l.href} className="font-sans text-white/50 hover:text-white transition-colors flex items-center gap-1.5" style={{ fontSize: "0.8rem" }}>
+                  <span className="text-gold text-xs">›</span>{l.label}
                 </Link>
+              </li>
+            ))}
+          </ul>
+          <h4 className="text-white font-bold tracking-[0.15em] uppercase mb-4 mt-8 font-sans" style={{ fontSize: "0.64rem" }}>Quick Links</h4>
+          <ul className="space-y-2">
+            {quickLinks.map(l => (
+              <li key={l.label}>
+                {l.external ? (
+                  <a href={l.href} target="_blank" rel="noopener noreferrer"
+                    className="font-sans text-white/50 hover:text-white transition-colors flex items-center gap-1.5"
+                    style={{ fontSize: "0.8rem" }}>
+                    <span className="text-gold text-xs">›</span>{l.label}
+                  </a>
+                ) : (
+                  <Link href={l.href} className="font-sans text-white/50 hover:text-white transition-colors flex items-center gap-1.5" style={{ fontSize: "0.8rem" }}>
+                    <span className="text-gold text-xs">›</span>{l.label}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Admissions links */}
+        {/* ── Admissions links ── */}
         <div>
           <h4 className="text-white font-bold tracking-[0.15em] uppercase mb-4 font-sans" style={{ fontSize: "0.64rem" }}>Admissions</h4>
           <ul className="space-y-2">
             {admissionLinks.map(l => (
-              <li key={l}>
-                <Link href="/admissions" className="font-sans text-white/50 hover:text-white transition-colors flex items-center gap-1.5" style={{ fontSize: "0.8rem" }}>
-                  <span className="text-gold text-xs">›</span>{l}
+              <li key={l.label}>
+                <Link href={l.href} className="font-sans text-white/50 hover:text-white transition-colors flex items-center gap-1.5" style={{ fontSize: "0.8rem" }}>
+                  <span className="text-gold text-xs">›</span>{l.label}
                 </Link>
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Newsletter */}
+        {/* ── Newsletter ── */}
         <div>
           <h4 className="text-white font-bold tracking-[0.15em] uppercase mb-4 font-sans" style={{ fontSize: "0.64rem" }}>Newsletter</h4>
           <p className="font-sans font-light text-white/50 leading-relaxed mb-3" style={{ fontSize: "0.78rem" }}>
-            Get our termly newsletter — events, results and school news.
+            Get our termly newsletter — events, results and school news delivered to your inbox.
           </p>
           <div className="flex">
             <input type="email" placeholder="your@email.com"
@@ -124,26 +155,28 @@ export default function Footer() {
               Join
             </button>
           </div>
-          <p className="font-sans text-white/30 mt-2" style={{ fontSize: "0.62rem" }}>For parents & guardians only.</p>
-          {/* Quick contact CTA */}
-          <div className="mt-6 p-4 rounded-2xl border border-gold/15" style={{ background: "rgba(196,146,42,0.06)" }}>
-            <p className="font-sans font-semibold text-white mb-2" style={{ fontSize: "0.8rem" }}>Have a question?</p>
-            <a href={WHATSAPP} target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 font-sans font-semibold text-green-400 hover:text-green-300 transition-colors"
+          <p className="font-sans text-white/30 mt-2 mb-6" style={{ fontSize: "0.62rem" }}>For parents & guardians only.</p>
+
+          <div className="p-4 rounded-2xl border border-gold/15" style={{ background: "rgba(196,146,42,0.06)" }}>
+            <p className="font-sans font-semibold text-white mb-1" style={{ fontSize: "0.8rem" }}>📋 School Portal</p>
+            <p className="font-sans text-white/45 mb-3" style={{ fontSize: "0.74rem" }}>
+              Staff, parents and students can access the school management system.
+            </p>
+            <a href="http://localhost:8080" target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-sans font-semibold text-gold-light hover:text-gold transition-colors"
               style={{ fontSize: "0.78rem" }}>
-              💬 Chat on WhatsApp →
+              Access Portal →
             </a>
           </div>
         </div>
       </div>
 
-      {/* Bottom bar */}
+      {/* ── Bottom bar ── */}
       <div className="border-t px-4 sm:px-6 lg:px-10 py-4 flex flex-col sm:flex-row items-center justify-between gap-2 font-sans"
         style={{ borderColor: "rgba(100,130,210,0.08)", fontSize: "0.71rem", color: "rgba(168,184,216,0.4)" }}>
-        <span>© 2025 Horizon Hope Academy Schools, Shamata, Nyandarua County, Kenya. All rights reserved.</span>
+        <span>© {new Date().getFullYear()} Horizon Hope Academy, Shamata, Nyandarua County, Kenya. All rights reserved.</span>
         <div className="flex gap-5">
-          <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
-          <Link href="#" className="hover:text-white transition-colors">Terms</Link>
+          <Link href="/faqs"    className="hover:text-white transition-colors">FAQs</Link>
           <Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link>
         </div>
       </div>
