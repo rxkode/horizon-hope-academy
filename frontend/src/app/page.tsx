@@ -43,11 +43,11 @@ const bgScenes = [
 
 /* ─── Stats ──────────────────────────────────────────────── */
 const stats = [
-  { num: "320+",    label: "Learners Enrolled" },
-  { num: "15+",     label: "Qualified Teachers" },
+  { num: "80+",     label: "Learners Enrolled" },
+  { num: "8+",      label: "Qualified Teachers" },
   { num: "PP1–G9",  label: "Grades Offered" },
-  { num: "Est. 2009", label: "Serving Shamata" },
-  { num: "94%",     label: "Secondary Transitions" },
+  { num: "Est. 2019", label: "Serving Shamata" },
+  { num: "100%",    label: "CBC Compliant" },
 ];
 
 /* ─── Programmes ─────────────────────────────────────────── */
@@ -153,7 +153,7 @@ export default function HomePage() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 w-full grid lg:grid-cols-2 gap-8 lg:gap-14 items-center py-10 lg:py-16">
 
           {/* LEFT — slide text */}
-          <div className="order-2 lg:order-1">
+          <div className="order-1 lg:order-1">
             <p className="font-sans text-[0.67rem] tracking-[0.14em] text-white/50 mb-3 font-medium">
               {String(slide + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}
             </p>
@@ -212,7 +212,7 @@ export default function HomePage() {
           </div>
 
           {/* RIGHT — HQ logo + bento grid below on mobile, side on desktop */}
-          <div className="order-1 lg:order-2 flex flex-col items-center gap-5">
+          <div className="order-2 lg:order-2 flex flex-col items-center gap-5">
 
             {/* Official seal — HQ PNG, crisp rendering */}
             <motion.div
@@ -236,14 +236,14 @@ export default function HomePage() {
             {/* ── BENTO GRID ── */}
             <div className="w-full grid grid-cols-2 gap-2.5" style={{ maxWidth: "420px" }}>
 
-              {/* KCPE Score */}
+              {/* School Motto */}
               <BentoCard className="bg-gold/[0.1] border-gold/30">
-                <span className="text-xl mb-1 block">🏆</span>
-                <div className="text-[0.6rem] font-bold tracking-[0.12em] uppercase text-white/50 mb-0.5">KCPE Mean 2024</div>
-                <div className="font-serif text-[1.65rem] font-bold text-white leading-none">342</div>
-                <div className="text-[0.62rem] text-white/50 mt-1">Out of 500 marks</div>
+                <span className="text-xl mb-1 block">⭐</span>
+                <div className="text-[0.6rem] font-bold tracking-[0.12em] uppercase text-white/50 mb-0.5">Our Motto</div>
+                <div className="font-serif text-[1rem] font-bold text-white leading-tight">Committed Service</div>
+                <div className="font-serif text-[1rem] font-bold text-gold-light leading-tight">to Excellence</div>
                 <span className="inline-block mt-1.5 px-2 py-0.5 rounded-full bg-gold/15 border border-gold/30 text-gold-light text-[0.58rem] font-bold tracking-wider">
-                  Top — Shamata Zone
+                  CBC · PP1 – Grade 9
                 </span>
               </BentoCard>
 

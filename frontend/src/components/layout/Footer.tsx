@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const WHATSAPP = "https://wa.me/254700000000?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20Horizon%20Hope%20Academy.";
+const WHATSAPP = "https://wa.me/254722777384?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20Horizon%20Hope%20Academy.";
 const EMAIL    = "mailto:info@horizonhopeacademy.sc.ke?subject=Enquiry%20—%20Horizon%20Hope%20Academy";
 
 const schoolLinks     = ["About Us","Our Teachers","CBC Curriculum","School Calendar","School Rules"];
@@ -43,10 +43,10 @@ export default function Footer() {
           </p>
           {/* Contact details — all linked */}
           <div className="space-y-2 mb-5">
-            <a href="tel:+254700000000"
+            <a href="tel:+254722777384"
               className="flex items-center gap-2 font-sans text-white/50 hover:text-white transition-colors"
               style={{ fontSize: "0.78rem" }}>
-              📞 +254 700 000 000
+              📞 +254 722 777 384
             </a>
             <a href={WHATSAPP} target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-2 font-sans text-green-400/70 hover:text-green-400 transition-colors"

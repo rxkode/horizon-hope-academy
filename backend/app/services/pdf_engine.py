@@ -24,7 +24,7 @@ LIGHT_GRAY  = colors.HexColor("#f5f5f5")
 SCHOOL_NAME = "Horizon Hope Academy Schools"
 SCHOOL_ADDR = "Shamata, Nyandarua County, Kenya"
 SCHOOL_PO   = "P.O. Box 20304-4, Kaheho"
-SCHOOL_TEL  = "+254 700 000 000"
+SCHOOL_TEL  = "+254 722 777 384"
 SCHOOL_EMAIL = "info@horizonhopeacademy.sc.ke"
 
 
