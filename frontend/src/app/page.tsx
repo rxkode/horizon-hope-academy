@@ -170,10 +170,8 @@ export default function HomePage() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 w-full grid lg:grid-cols-2 gap-8 lg:gap-14 items-center py-4 lg:py-4">
 
           {/* LEFT — slide text */}
-          <div className="order-1 lg:order-1">
-            <p className="font-sans text-[0.67rem] tracking-[0.14em] text-white/50 mb-3 font-medium">
-              {String(slide + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}
-            </p>
+          <div className="order-1 lg:order-1 lg:-mt-16">
+
 
             <AnimatePresence mode="wait">
               <motion.div
