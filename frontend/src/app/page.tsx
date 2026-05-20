@@ -167,7 +167,7 @@ export default function HomePage() {
         />
 
         {/* ── CONTENT GRID ── */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 w-full grid lg:grid-cols-2 gap-8 lg:gap-14 items-center py-10 lg:py-16">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 w-full grid lg:grid-cols-2 gap-8 lg:gap-14 items-center py-4 lg:py-4">
 
           {/* LEFT — slide text */}
           <div className="order-1 lg:order-1">
