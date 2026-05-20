@@ -82,21 +82,20 @@ services:
 
   # ── RosarioSIS School Portal ───────────────────────────────
   rosariosis:
-    image: rosariosis/rosariosis:latest
+    image: rosariosis/rosariosis:master
     container_name: hha_portal
     restart: unless-stopped
     environment:
-      ROSARIO_DB_HOST: postgres_sis
-      ROSARIO_DB_PORT: 5432
-      ROSARIO_DB_NAME: rosariosis_db
-      ROSARIO_DB_USER: rosario
-      ROSARIO_DB_PASS: rosario_dev_password
-      ROSARIO_ADMIN_EMAIL: admin@horizonhopeacademy.sc.ke
-      ROSARIO_ADMIN_PASS: HHA_Admin_2025!
-      ROSARIO_SCHOOL_NAME: "Horizon Hope Academy Schools"
+      PGHOST: postgres_sis
+      PGPORT: 5432
+      PGUSER: rosario
+      PGPASSWORD: rosario_dev_password
+      PGDATABASE: rosariosis_db
+      ROSARIOSIS_ADMIN_EMAIL: admin@horizonhopeacademy.sc.ke
+      ROSARIOSIS_YEAR: 2025
+      ROSARIOSIS_LANG: en_US
     volumes:
       - rosario_uploads:/var/www/html/uploads
-      - ../../frontend/public/assets/logo-navbar.png:/var/www/html/assets/logo.png:ro
     ports:
       - "8080:80"
     depends_on:
