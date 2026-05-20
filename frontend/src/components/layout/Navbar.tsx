@@ -15,6 +15,7 @@ const PHONE     = "+254 722 777 384";
 const NAV_LINKS = [
   { href: "/",           label: "Home"      },
   { href: "/about",      label: "About"     },
+  { href: "/gallery",    label: "Gallery"   },
   { href: "/admissions", label: "Admission" },
   { href: "/contact",    label: "Contact"   },
 ];

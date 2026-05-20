@@ -5,6 +5,7 @@ import Link from "next/link";
 import SectionLabel from "@/components/ui/SectionLabel";
 import Button from "@/components/ui/Button";
 import { useState, useEffect } from "react";
+import GalleryPreview from "@/components/sections/Gallery";
 
 /* ─── Hero slides ────────────────────────────────────────── */
 const slides = [
@@ -34,12 +35,16 @@ const slides = [
   },
 ];
 
-/* ─── Background gallery photos (placeholder gradients) ─── */
+/* ─── Hero background photos ─────────────────────────────── */
+// Replace these Unsplash URLs with real school photos:
+// Put photos in /public/assets/hero/ named hero-1.jpg, hero-2.jpg, hero-3.jpg
+// Then change src to: "/assets/hero/hero-1.jpg" etc.
 const bgScenes = [
-  "linear-gradient(135deg, #0a1628 0%, #1a2d5a 40%, #0d3320 100%)",
-  "linear-gradient(135deg, #1a0d2e 0%, #0d1b45 40%, #1a2800 100%)",
-  "linear-gradient(135deg, #0d1b45 0%, #2a1a00 50%, #0a2010 100%)",
+  "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=85",
+  "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1600&q=85",
+  "https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=1600&q=85",
 ];
+const bgIsPhoto = true;
 
 /* ─── Stats ──────────────────────────────────────────────── */
 const stats = [
@@ -124,7 +129,7 @@ export default function HomePage() {
           ════════════════════════════════════════════════════ */}
       <section className="relative min-h-screen flex items-center pt-[68px] overflow-hidden">
 
-        {/* ── Animated background scenes ── */}
+        {/* ── Animated background photo slideshow ── */}
         <AnimatePresence mode="wait">
           <motion.div
             key={bgSlide}
@@ -133,8 +138,20 @@ export default function HomePage() {
             exit={{ opacity: 0 }}
             transition={{ duration: 2.5, ease: "easeInOut" }}
             className="absolute inset-0 z-0"
-            style={{ background: bgScenes[bgSlide] }}
-          />
+          >
+            {/* Photo layer */}
+            <div className="absolute inset-0"
+              style={{
+                backgroundImage: `url(${bgScenes[bgSlide]})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            />
+            {/* Dark overlay so text remains readable */}
+            <div className="absolute inset-0"
+              style={{ background: "linear-gradient(135deg, rgba(10,22,40,0.82) 0%, rgba(13,27,69,0.75) 50%, rgba(10,22,40,0.80) 100%)" }}
+            />
+          </motion.div>
         </AnimatePresence>
 
         {/* Topographic grid overlay */}
@@ -380,6 +397,11 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ════════════════════════════════════
+          GALLERY PREVIEW
+          ════════════════════════════════════ */}
+      <GalleryPreview />
 
       {/* ════════════════════════════════════
           TESTIMONIALS
