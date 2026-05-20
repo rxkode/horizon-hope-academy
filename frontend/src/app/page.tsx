@@ -127,7 +127,7 @@ export default function HomePage() {
       {/* ════════════════════════════════════════════════════
           HERO — full-screen with animated background + bento
           ════════════════════════════════════════════════════ */}
-      <section className="relative min-h-screen flex items-center pt-[64px] md:pt-[96px] overflow-hidden">
+      <section className="relative flex items-center overflow-hidden" style={{ minHeight: "calc(100vh - 96px)" }}>
 
         {/* ── Animated background photo slideshow ── */}
         <AnimatePresence mode="wait">
@@ -170,7 +170,7 @@ export default function HomePage() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 w-full grid lg:grid-cols-2 gap-8 lg:gap-14 items-center py-4 lg:py-4">
 
           {/* LEFT — slide text */}
-          <div className="order-1 lg:order-1 lg:-mt-16">
+          <div className="order-1 lg:order-1">
 
 
             <AnimatePresence mode="wait">

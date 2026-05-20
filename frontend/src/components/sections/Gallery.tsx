@@ -28,12 +28,12 @@ const fadeUp = (delay = 0) => ({
 // Preview photos shown on homepage (6 of 12 total)
 // Replace src with "/assets/gallery/gallery-NN.jpg" when you have real photos
 const previewPhotos = [
-  { src: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=600&q=80", alt: "Learners reading in the library", caption: "Reading & Discovery" },
-  { src: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&q=80", alt: "Children in a classroom", caption: "CBC Classroom Learning" },
-  { src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80", alt: "Children playing football", caption: "Sports & Athletics" },
-  { src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80", alt: "Teacher with students", caption: "Personal Attention" },
-  { src: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80", alt: "Students in computer lab", caption: "Computer & ICT Lab" },
-  { src: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=600&q=80", alt: "School farm and nature", caption: "Agriculture & Environment" },
+  { src: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&q=80", alt: "African children in classroom", caption: "CBC Classroom Learning" },
+  { src: "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=600&q=80", alt: "African students learning", caption: "Reading & Discovery" },
+  { src: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&q=80", alt: "Children in Kenya school", caption: "Personal Attention" },
+  { src: "https://images.unsplash.com/photo-1555116505-38ab61800975?w=600&q=80", alt: "African school children", caption: "Sports & Athletics" },
+  { src: "https://images.unsplash.com/photo-1491841573634-28140fc7ced7?w=600&q=80", alt: "Students in Africa", caption: "Computer & ICT Lab" },
+  { src: "https://images.unsplash.com/photo-1531983412531-1f49a365ffed?w=600&q=80", alt: "School farm Kenya", caption: "Agriculture & Environment" },
 ];
 
 export default function GalleryPreview() {

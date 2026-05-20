@@ -28,18 +28,18 @@ const WA_URL = "https://wa.me/254722777384?text=Hello%2C%20I%20would%20like%20to
 type Category = "All" | "Classroom" | "Sports" | "Activities" | "Campus";
 
 const allPhotos: { src: string; alt: string; caption: string; category: Category }[] = [
-  { src: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=800&q=80", alt: "Learners reading", caption: "Reading & Discovery", category: "Classroom" },
-  { src: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=80", alt: "CBC classroom learning", caption: "CBC Classroom Learning", category: "Classroom" },
-  { src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&q=80", alt: "Teacher with students", caption: "Personal Attention", category: "Classroom" },
-  { src: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=80", alt: "Computer lab", caption: "Computer & ICT Lab", category: "Classroom" },
-  { src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80", alt: "Football on the field", caption: "Football & Athletics", category: "Sports" },
-  { src: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&q=80", alt: "Children running", caption: "Sports Day", category: "Sports" },
-  { src: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800&q=80", alt: "School farm", caption: "Agriculture & Farming", category: "Activities" },
-  { src: "https://images.unsplash.com/photo-1588072432836-e10032774350?w=800&q=80", alt: "Children doing art", caption: "Music & Arts", category: "Activities" },
-  { src: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&q=80", alt: "Drama performance", caption: "Drama & Storytelling", category: "Activities" },
-  { src: "https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?w=800&q=80", alt: "School grounds", caption: "Our Campus", category: "Campus" },
-  { src: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=80", alt: "Dining hall", caption: "Dining Hall", category: "Campus" },
-  { src: "https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=800&q=80", alt: "Highland landscape", caption: "Shamata, Aberdares", category: "Campus" },
+  { src: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80", alt: "African children in classroom", caption: "CBC Classroom Learning", category: "Classroom" },
+  { src: "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=800&q=80", alt: "African students learning together", caption: "Group Learning", category: "Classroom" },
+  { src: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80", alt: "Teacher with African students", caption: "Personal Attention", category: "Classroom" },
+  { src: "https://images.unsplash.com/photo-1491841573634-28140fc7ced7?w=800&q=80", alt: "African student using computer", caption: "Computer & ICT Lab", category: "Classroom" },
+  { src: "https://images.unsplash.com/photo-1555116505-38ab61800975?w=800&q=80", alt: "African school children playing", caption: "Football & Athletics", category: "Sports" },
+  { src: "https://images.unsplash.com/photo-1531983412531-1f49a365ffed?w=800&q=80", alt: "Children running in Africa", caption: "Sports Day", category: "Sports" },
+  { src: "https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=800&q=80", alt: "African children outdoor activities", caption: "Outdoor Activities", category: "Sports" },
+  { src: "https://images.unsplash.com/photo-1516912481808-3406841bd33c?w=800&q=80", alt: "African children in choir", caption: "Music & Choir", category: "Activities" },
+  { src: "https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=800&q=80", alt: "School farm Kenya highlands", caption: "Agriculture & Farming", category: "Activities" },
+  { src: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80", alt: "Students doing art", caption: "Arts & Crafts", category: "Activities" },
+  { src: "https://images.unsplash.com/photo-1564981797816-1043664bf78d?w=800&q=80", alt: "Kenya highland landscape Aberdares", caption: "Shamata, Aberdares", category: "Campus" },
+  { src: "https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?w=800&q=80", alt: "School building and grounds", caption: "Our Campus", category: "Campus" },
 ];
 
 const categories: Category[] = ["All", "Classroom", "Sports", "Activities", "Campus"];
