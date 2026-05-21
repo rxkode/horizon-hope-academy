@@ -62,6 +62,9 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     qualities: [75, 85, 100],
     minimumCacheTTL: 86400,
+    remotePatterns: [
+      { protocol: 'https', hostname: 'images.unsplash.com', port: '', pathname: '/**' },
+    ],
   },
   compress: true,
   turbopack: {
