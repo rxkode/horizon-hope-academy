@@ -25,7 +25,7 @@ SCHOOL_NAME = "Horizon Hope Academy Schools"
 SCHOOL_ADDR = "Shamata, Nyandarua County, Kenya"
 SCHOOL_PO   = "P.O. Box 20304-4, Kaheho"
 SCHOOL_TEL  = "+254 722 777 384"
-SCHOOL_EMAIL = "info@horizonhopeacademy.sc.ke"
+SCHOOL_EMAIL = "horizonhopeacademy.sc@gmail.com"
 
 
 def _header_table(logo_path: str) -> Table:

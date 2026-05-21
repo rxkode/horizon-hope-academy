@@ -124,6 +124,25 @@ export default function AdmissionsPage() {
         </div>
       </section>
 
+      {/* ── Term dates ── */}
+      <div className="bg-white/[0.03] border-y border-white/[0.06] py-5 px-4">
+        <div className="max-w-4xl mx-auto flex flex-wrap justify-center gap-6">
+          {[
+            { term: "Term 1 2026", dates: "Jan – Apr", status: "Completed" },
+            { term: "Term 2 2026", dates: "May – Aug", status: "Current", current: true },
+            { term: "Term 3 2026", dates: "Sept – Nov", status: "Upcoming" },
+          ].map(t => (
+            <div key={t.term} className="text-center">
+              <div className={`inline-block px-3 py-0.5 rounded-full text-[0.62rem] font-bold tracking-wider uppercase mb-1 ${t.current ? "bg-gold/20 border border-gold/40 text-gold-light" : "bg-white/[0.06] border border-white/10 text-white/40"}`}>
+                {t.status}
+              </div>
+              <div className="font-serif font-semibold text-white text-[0.88rem]">{t.term}</div>
+              <div className="font-sans text-white/45 text-[0.75rem]">{t.dates}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* ── Fees notice ── */}
       <div className="bg-gold/[0.08] border-y border-gold/20 py-5 px-4 text-center">
         <p className="font-sans text-[0.88rem] text-white/75">

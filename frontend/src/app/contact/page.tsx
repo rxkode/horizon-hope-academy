@@ -35,8 +35,8 @@ const contactInfo = [
   {
     icon: "✉️",
     title: "Email Address",
-    lines: ["info@horizonhopeacademy.sc.ke"],
-    links: ["mailto:info@horizonhopeacademy.sc.ke"],
+    lines: ["horizonhopeacademy.sc@gmail.com"],
+    links: ["mailto:horizonhopeacademy.sc@gmail.com"],
   },
   {
     icon: "🕐",

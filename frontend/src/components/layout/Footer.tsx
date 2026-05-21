@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const WHATSAPP = "https://wa.me/254722777384?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20Horizon%20Hope%20Academy.";
-const EMAIL    = "mailto:info@horizonhopeacademy.sc.ke?subject=Enquiry%20%E2%80%94%20Horizon%20Hope%20Academy";
+const EMAIL    = "mailto:horizonhopeacademy.sc@gmail.com?subject=Enquiry%20%E2%80%94%20Horizon%20Hope%20Academy";
 
 const schoolLinks = [
   { label: "About Us",        href: "/about"             },
@@ -21,14 +21,11 @@ const admissionLinks = [
 const quickLinks = [
   { label: "Home",            href: "/"                  },
   { label: "Contact Us",      href: "/contact"           },
-  { label: "School Portal",   href: "http://localhost:8080", external: true },
+  { label: "School Portal",   href: "/portal", external: false },
 ];
 
 const socials = [
-  { label: "fb", href: "https://facebook.com",  title: "Facebook"  },
-  { label: "wa", href: WHATSAPP,                title: "WhatsApp", isWhatsApp: true },
-  { label: "yt", href: "https://youtube.com",   title: "YouTube"   },
-  { label: "𝕏",  href: "https://x.com",         title: "X / Twitter" },
+  { label: "wa", href: WHATSAPP, title: "WhatsApp", isWhatsApp: true },
 ];
 
 export default function Footer() {
@@ -73,7 +70,7 @@ export default function Footer() {
             <a href={EMAIL}
               className="flex items-center gap-2 font-sans text-white/50 hover:text-gold-light transition-colors"
               style={{ fontSize: "0.78rem" }}>
-              ✉️ info@horizonhopeacademy.sc.ke
+              ✉️ horizonhopeacademy.sc@gmail.com
             </a>
             <div className="font-sans text-white/50" style={{ fontSize: "0.78rem" }}>
               📍 Shamata, Nyandarua County, Kenya
@@ -160,9 +157,9 @@ export default function Footer() {
           <div className="p-4 rounded-2xl border border-gold/15" style={{ background: "rgba(196,146,42,0.06)" }}>
             <p className="font-sans font-semibold text-white mb-1" style={{ fontSize: "0.8rem" }}>📋 School Portal</p>
             <p className="font-sans text-white/45 mb-3" style={{ fontSize: "0.74rem" }}>
-              Staff, parents and students can access the school management system.
+              Admin, teachers, parents and students — access your account here.
             </p>
-            <a href="http://localhost:8080" target="_blank" rel="noopener noreferrer"
+            <a href="/portal"
               className="inline-flex items-center gap-1.5 font-sans font-semibold text-gold-light hover:text-gold transition-colors"
               style={{ fontSize: "0.78rem" }}>
               Access Portal →

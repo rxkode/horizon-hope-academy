@@ -8,8 +8,8 @@ import { Menu, X, Mail, Phone } from "lucide-react";
 
 /* ── Constants ────────────────────────────────────────────── */
 const WA_URL    = "https://wa.me/254722777384?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20Horizon%20Hope%20Academy.";
-const EMAIL_URL = "mailto:info@horizonhopeacademy.sc.ke?subject=Enquiry%20%E2%80%94%20Horizon%20Hope%20Academy";
-const EMAIL     = "info@horizonhopeacademy.sc.ke";
+const EMAIL_URL = "mailto:horizonhopeacademy.sc@gmail.com?subject=Enquiry%20%E2%80%94%20Horizon%20Hope%20Academy";
+const EMAIL     = "horizonhopeacademy.sc@gmail.com";
 const PHONE     = "+254 722 777 384";
 
 const NAV_LINKS = [
@@ -17,6 +17,7 @@ const NAV_LINKS = [
   { href: "/about",      label: "About"     },
   { href: "/gallery",    label: "Gallery"   },
   { href: "/admissions", label: "Admission" },
+  { href: "/portal",     label: "Portal"    },
   { href: "/contact",    label: "Contact"   },
 ];
 

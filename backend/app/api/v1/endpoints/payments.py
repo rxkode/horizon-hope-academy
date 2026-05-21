@@ -15,6 +15,13 @@ from app.db.session import get_db
 
 router = APIRouter()
 
+# ── Tower Sacco M-Pesa Paybill ────────────────────────────────
+# Paybill: 506900
+# Account: 000900502004324 (Tower Sacco account number)
+# Parents enter their child admission number as the account reference
+TOWER_SACCO_PAYBILL = "506900"
+TOWER_SACCO_ACCOUNT = "000900502004324"
+
 
 # ── Daraja payload schemas ────────────────────────────────────
 class MPesaValidationPayload(BaseModel):
