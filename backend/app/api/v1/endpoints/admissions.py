@@ -3,6 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from datetime import datetime, timedelta, timezone
 from app.db.session import get_db
+from app.services.email_service import notify_admission_enquiry
 from app.db.models.admission import AdmissionInquiry
 from app.schemas.admission import AdmissionCreate, AdmissionResponse
 from app.core.config import get_settings

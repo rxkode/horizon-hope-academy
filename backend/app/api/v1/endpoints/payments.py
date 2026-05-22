@@ -12,6 +12,7 @@ from sqlalchemy import select, text
 from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 from app.db.session import get_db
+from app.services.email_service import notify_payment_received
 
 router = APIRouter()
 
@@ -137,6 +138,19 @@ async def mpesa_confirmation(
         )
 
         await db.commit()
+
+        # Notify school admin of payment (non-blocking)
+        try:
+            notify_payment_received(
+                student_name=adm,
+                admission_number=adm,
+                amount=amount,
+                trans_id=payload.TransID,
+                msisdn=payload.MSISDN,
+                trans_time=trans_dt,
+            )
+        except Exception:
+            pass
 
     except Exception as e:
         await db.rollback()

@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from app.db.session import get_db
+from app.services.email_service import notify_contact_message
 from app.db.models.contact import ContactMessage
 from app.schemas.contact import ContactCreate, ContactResponse
 
