@@ -230,3 +230,11 @@ async def mpesa_simulate(
     """
     result = simulate_c2b_payment(amount=amount, msisdn=msisdn, bill_ref=bill_ref)
     return result
+
+
+@router.get("/debug/ledger")
+async def debug_ledger(db: AsyncSession = Depends(get_db)):
+    """Temporary debug endpoint — shows all students in ledger."""
+    result = await db.execute(text("SELECT admission_number, student_name, grade FROM student_fee_ledger"))
+    rows = result.fetchall()
+    return {"count": len(rows), "students": [{"adm": r[0], "name": r[1], "grade": r[2]} for r in rows]}
