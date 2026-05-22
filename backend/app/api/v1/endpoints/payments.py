@@ -13,6 +13,9 @@ from datetime import datetime, timezone
 from pydantic import BaseModel, Field
 from app.db.session import get_db
 from app.services.email_service import notify_payment_received
+from app.services.mpesa_service import (
+    get_access_token, register_c2b_urls, simulate_c2b_payment
+)
 
 router = APIRouter()
 
@@ -191,3 +194,39 @@ async def get_balance(
         "amount_paid":      float(row.amount_paid),
         "balance_due":      float(row.balance_due),
     }
+
+
+# ── M-Pesa service endpoints ──────────────────────────────────
+
+@router.get("/mpesa/token")
+async def mpesa_token():
+    """Test endpoint — verify Daraja API connectivity."""
+    token = get_access_token()
+    if token:
+        return {"status": "ok", "token_length": len(token)}
+    return {"status": "error", "detail": "Could not obtain token"}
+
+
+@router.post("/mpesa/register-urls")
+async def mpesa_register_urls():
+    """
+    Register C2B callback URLs with Safaricom.
+    Call once when going live or when callback URL changes.
+    """
+    result = register_c2b_urls()
+    return result
+
+
+@router.post("/mpesa/simulate")
+async def mpesa_simulate(
+    amount: float = 100.0,
+    msisdn: str = "254708374149",
+    bill_ref: str = "HHA/2025/001",
+):
+    """
+    Sandbox only: simulate a parent paying school fees.
+    Safaricom will call our confirmation endpoint automatically.
+    bill_ref = student admission number
+    """
+    result = simulate_c2b_payment(amount=amount, msisdn=msisdn, bill_ref=bill_ref)
+    return result
