@@ -8,7 +8,7 @@ import { Menu, X, Mail, ChevronDown } from "lucide-react";
 
 /* ── Constants ───────────────────────────────────────────── */
 const WA_URL    = "https://wa.me/254722777384?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20Horizon%20Hope%20Academy.";
-const EMAIL_URL = "mailto:horizonhopeacademy.sc@gmail.com?subject=Enquiry%20%E2%80%94%20Horizon%20Hope%20Academy";
+const EMAIL_URL = "mailto:horizonhopeacademy.sc@gmail.com?subject=Enquiry — Horizon Hope Academy";
 const EMAIL     = "horizonhopeacademy.sc@gmail.com";
 const PHONE     = "+254 722 777 384";
 

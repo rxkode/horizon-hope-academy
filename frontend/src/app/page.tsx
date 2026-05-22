@@ -110,13 +110,13 @@ export default function HomePage() {
 
   /* Hero text carousel */
   useEffect(() => {
-    const t = setInterval(() => setSlide(s => (s + 1) % slides.length), 5500);
+    const t = setInterval(() => setSlide(s => (s + 1) % slides.length), 8000);
     return () => clearInterval(t);
   }, []);
 
   /* Background scene carousel — slower */
   useEffect(() => {
-    const t = setInterval(() => setBgSlide(s => (s + 1) % bgScenes.length), 8000);
+    const t = setInterval(() => setBgSlide(s => (s + 1) % bgScenes.length), 12000);
     return () => clearInterval(t);
   }, []);
 

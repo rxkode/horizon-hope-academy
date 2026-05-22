@@ -24,6 +24,13 @@
   h1, h2, h3, h4 { @apply font-serif; }
 }
 
+@layer base {
+  /* Improve readability — boost body text contrast */
+  p, li, span, td, th {
+    color: rgba(255, 255, 255, 0.85);
+  }
+}
+
 @layer utilities {
   .topo-bg {
     background-image: repeating-linear-gradient(

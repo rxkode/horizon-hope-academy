@@ -25,7 +25,24 @@ export const metadata: Metadata = {
   keywords: [
     "Horizon Hope Academy", "Shamata school", "Nyandarua school",
     "CBC school Kenya", "Aberdares school", "private school Kenya",
+    "HorizonHopeAcademy", "horizon hope academy shamata",
+    "best school nyandarua", "primary school kenya aberdares",
+    "CBC curriculum kenya", "PP1 Grade 9 kenya school",
   ],
+  authors: [{ name: "Horizon Hope Academy" }],
+  creator: "Horizon Hope Academy",
+  publisher: "Horizon Hope Academy",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
+  alternates: {
+    canonical: "https://horizon-hope-academy.vercel.app",
+  },
+  verification: {
+    google: "",
+  },
   openGraph: {
     title: "Horizon Hope Academy Schools",
     description: "Committed Service to Excellence — Shamata, Nyandarua County, Kenya",

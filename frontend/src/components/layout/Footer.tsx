@@ -1,8 +1,10 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 const WHATSAPP = "https://wa.me/254722777384?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20Horizon%20Hope%20Academy.";
-const EMAIL    = "mailto:horizonhopeacademy.sc@gmail.com?subject=Enquiry%20%E2%80%94%20Horizon%20Hope%20Academy";
+const EMAIL    = "mailto:horizonhopeacademy.sc@gmail.com?subject=Enquiry — Horizon Hope Academy";
 
 const schoolLinks = [
   { label: "About Us",        href: "/about"             },
@@ -142,17 +144,7 @@ export default function Footer() {
           <p className="font-sans font-light text-white/50 leading-relaxed mb-3" style={{ fontSize: "0.78rem" }}>
             Get our termly newsletter — events, results and school news delivered to your inbox.
           </p>
-          <div className="flex">
-            <input type="email" placeholder="your@email.com"
-              className="flex-1 min-w-0 px-3 py-2 font-sans rounded-l-full text-white placeholder:text-white/25 outline-none focus:border-gold/40 transition-colors"
-              style={{ fontSize: "0.78rem", background: "rgba(255,255,255,0.04)", border: "0.5px solid rgba(100,130,210,0.2)", borderRight: "none" }} />
-            <button
-              className="px-4 py-2 font-bold rounded-r-full hover:bg-gold-light transition-colors whitespace-nowrap font-sans"
-              style={{ background: "#c4922a", color: "#0d1b45", fontSize: "0.75rem" }}>
-              Join
-            </button>
-          </div>
-          <p className="font-sans text-white/30 mt-2 mb-6" style={{ fontSize: "0.62rem" }}>For parents & guardians only.</p>
+          <NewsletterForm />
 
           <div className="p-4 rounded-2xl border border-gold/15" style={{ background: "rgba(196,146,42,0.06)" }}>
             <p className="font-sans font-semibold text-white mb-1" style={{ fontSize: "0.8rem" }}>📋 School Portal</p>
