@@ -15,22 +15,23 @@ class AdmissionInquiry(Base):
     id: Mapped[int] = mapped_column(sa.Integer, primary_key=True, index=True)
 
     # [PII] Parent/Guardian details — Kenya DPA protected
-    guardian_name: Mapped[str] = mapped_column(sa.String(100), nullable=False)
+    guardian_name:  Mapped[str] = mapped_column(sa.String(100), nullable=False)
     guardian_email: Mapped[str] = mapped_column(sa.String(255), nullable=False, index=True)
-    guardian_phone: Mapped[str] = mapped_column(sa.String(20), nullable=False)
+    guardian_phone: Mapped[str] = mapped_column(sa.String(20),  nullable=False)
 
     # [PII] Child details — minor data, extra sensitivity
-    child_name: Mapped[str] = mapped_column(sa.String(100), nullable=False)
-    child_age: Mapped[int] = mapped_column(sa.Integer, nullable=False)
-    grade_applying: Mapped[str] = mapped_column(sa.String(20), nullable=False)
+    child_name:     Mapped[str]      = mapped_column(sa.String(100), nullable=False)
+    child_dob:      Mapped[str|None] = mapped_column(sa.String(20),  nullable=True,
+                                                     comment="[PII] ISO date e.g. 2018-04-12")
+    grade_applying: Mapped[str]      = mapped_column(sa.String(20),  nullable=False)
 
     # Metadata
-    message: Mapped[str | None] = mapped_column(sa.Text, nullable=True)
-    status: Mapped[str] = mapped_column(sa.String(20), default="pending", nullable=False)
-    created_at: Mapped[datetime] = mapped_column(
+    message:      Mapped[str|None]  = mapped_column(sa.Text,      nullable=True)
+    status:       Mapped[str]       = mapped_column(sa.String(20), default="pending", nullable=False)
+    created_at:   Mapped[datetime]  = mapped_column(
         sa.DateTime(timezone=True),
         default=lambda: datetime.now(timezone.utc),
         nullable=False,
     )
     # Kenya DPA: data must be deleted after retention period
-    retain_until: Mapped[datetime | None] = mapped_column(sa.DateTime(timezone=True), nullable=True)
+    retain_until: Mapped[datetime|None] = mapped_column(sa.DateTime(timezone=True), nullable=True)
