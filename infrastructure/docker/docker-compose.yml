@@ -69,6 +69,7 @@ services:
     environment:
       DATABASE_URL: postgresql+asyncpg://hhacademy:hhacademy_dev_password@postgres:5432/horizon_hope_db
       REDIS_URL: redis://:redis_dev_password@redis:6379/0
+      MPESA_CALLBACK_URL: https://horizon-hope-academy.vercel.app/api/v1/payments/confirmation
     ports:
       - "8000:8000"
     depends_on:
