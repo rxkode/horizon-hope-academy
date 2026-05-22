@@ -21,12 +21,15 @@ python-jose[cryptography]==3.3.0
 passlib[bcrypt]==1.7.4
 python-multipart==0.0.9
 
-# HTTP client (for future integrations)
+# HTTP client (M-Pesa Daraja + Airtel)
 httpx==0.27.0
-# PDF generation
-weasyprint==62.3
+
+# PDF generation — ReportLab only (WeasyPrint too heavy for free tier)
+# WeasyPrint requires Cairo/Pango system libs (~150MB) — install separately on paid tier
 reportlab==4.2.2
 
 # M-Pesa / payments
 cryptography==42.0.8
+
+# RosarioSIS DB connection (synchronous)
 psycopg2-binary==2.9.9
