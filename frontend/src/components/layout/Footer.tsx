@@ -37,7 +37,7 @@ export default function Footer() {
         <div>
           <Link href="/" className="flex items-center gap-3 mb-4">
             <div className="relative flex-shrink-0" style={{ width: "40px", height: "40px" }}>
-              <Image src="/assets/logo-navbar.png" alt="Horizon Hope Academy" fill sizes="40px"
+              <Image src="/assets/logo-footer.png" alt="Horizon Hope Academy" fill sizes="40px"
                 className="object-contain" quality={100} />
             </div>
             <span className="font-serif font-semibold text-white leading-tight" style={{ fontSize: "1rem" }}>

@@ -1,7 +1,7 @@
 {
   "name": "Horizon Hope Academy Schools",
   "short_name": "HHA Schools",
-  "description": "Committed Service to Excellence \u2014 Shamata, Nyandarua",
+  "description": "Committed Service to Excellence — Shamata, Nyandarua",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0d1b45",
@@ -9,13 +9,23 @@
   "orientation": "portrait-primary",
   "icons": [
     {
+      "src": "/assets/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/favicon.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
       "src": "/assets/logo-navbar.png",
-      "sizes": "192x192",
+      "sizes": "800x800",
       "type": "image/png"
     },
     {
       "src": "/assets/logo-hero.png",
-      "sizes": "512x512",
+      "sizes": "1200x1200",
       "type": "image/png"
     }
   ],
