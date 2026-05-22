@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     canonical: "https://horizon-hope-academy.vercel.app",
   },
   verification: {
-    google: "",
+    google: "hiyytQAPfLoual4z2lDVQIXPvC3uiNY5p53AG4e_DlM",
   },
   openGraph: {
     title: "Horizon Hope Academy Schools",
@@ -67,6 +67,39 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{__html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "School",
+            "name": "Horizon Hope Academy",
+            "alternateName": "HHA",
+            "url": "https://horizon-hope-academy.vercel.app",
+            "logo": "https://horizon-hope-academy.vercel.app/assets/logo-navbar.png",
+            "description": "A caring private school in Shamata, Nyandarua County, Kenya. CBC curriculum PP1 to Grade 9. Committed service to excellence.",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Shamata–Mairo Inne Road",
+              "addressLocality": "Shamata",
+              "addressRegion": "Nyandarua County",
+              "postalCode": "20304",
+              "addressCountry": "KE"
+            },
+            "telephone": "+254722777384",
+            "email": "horizonhopeacademy.sc@gmail.com",
+            "foundingDate": "1998",
+            "numberOfEmployees": {"@type": "QuantitativeValue", "value": 8},
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": -0.4167,
+              "longitude": 36.6833
+            },
+            "openingHours": "Mo-Fr 08:00-17:00",
+            "sameAs": []
+          })}}
+        />
+      </head>
       <body className="min-h-screen flex flex-col bg-navy antialiased">
         <Navbar />
         {/*
