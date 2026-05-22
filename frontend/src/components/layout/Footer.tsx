@@ -30,6 +30,61 @@ const socials = [
   { label: "wa", href: WHATSAPP, title: "WhatsApp", isWhatsApp: true },
 ];
 
+
+function NewsletterForm() {
+  const [email, setEmail]   = useState("");
+  const [status, setStatus] = useState<"idle"|"sending"|"done"|"error">("idle");
+
+  const submit = async () => {
+    if (!email || status === "sending") return;
+    setStatus("sending");
+    try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+      const res = await fetch(`${apiUrl}/api/v1/newsletter/subscribe`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      setStatus(res.ok ? "done" : "error");
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  if (status === "done") return (
+    <p className="font-sans text-green-400 text-[0.78rem] mb-6">
+      Subscribed! Check your inbox.
+    </p>
+  );
+
+  return (
+    <>
+      <div className="flex mb-1">
+        <input
+          type="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          onKeyDown={e => e.key === "Enter" && submit()}
+          placeholder="your@email.com"
+          className="flex-1 min-w-0 px-3 py-2 font-sans rounded-l-full text-white placeholder:text-white/25 outline-none transition-colors"
+          style={{ fontSize: "0.78rem", background: "rgba(255,255,255,0.04)", border: "0.5px solid rgba(100,130,210,0.2)", borderRight: "none" }}
+        />
+        <button onClick={submit} disabled={status === "sending"}
+          className="px-4 py-2 font-bold rounded-r-full hover:bg-gold-light transition-colors whitespace-nowrap font-sans disabled:opacity-50"
+          style={{ background: "#c4922a", color: "#0d1b45", fontSize: "0.75rem" }}>
+          {status === "sending" ? "..." : "Join"}
+        </button>
+      </div>
+      {status === "error" && (
+        <p className="font-sans text-red-400 text-[0.7rem]">Failed. Try again.</p>
+      )}
+      <p className="font-sans text-white/30 mt-2 mb-6" style={{ fontSize: "0.62rem" }}>
+        For parents & guardians only.
+      </p>
+    </>
+  );
+}
+
 export default function Footer() {
   return (
     <footer style={{ background: "#0a1228", borderTop: "0.5px solid rgba(100,130,210,0.1)" }}>
