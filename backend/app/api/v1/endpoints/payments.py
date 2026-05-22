@@ -164,7 +164,7 @@ async def mpesa_confirmation(
 
 
 # ── Balance query (IDOR-safe: JWT scoped to parent's children) ─
-@router.get("/balance/{admission_number}")
+@router.get("/balance/{admission_number:path}")
 async def get_balance(
     admission_number: str,
     db: AsyncSession = Depends(get_db)
