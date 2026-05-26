@@ -3,7 +3,7 @@ API v1 Router — aggregates all endpoint routers.
 All routes are prefixed /api/v1 in main.py.
 """
 from fastapi import APIRouter
-from app.api.v1.endpoints import health, admissions, contact, payments, documents, sync, newsletter
+from app.api.v1.endpoints import health, admissions, contact, payments, documents, sync, newsletter, admin
 
 api_router = APIRouter()
 
@@ -14,3 +14,4 @@ api_router.include_router(payments.router,    prefix="/payments",    tags=["M-Pe
 api_router.include_router(documents.router,   prefix="/documents",   tags=["PDF Documents"])
 api_router.include_router(sync.router,        prefix="/sync",        tags=["Offline Sync"])
 api_router.include_router(newsletter.router,  prefix="/newsletter",  tags=["Newsletter"])
+api_router.include_router(admin.router,       prefix="",             tags=["Admin"])
