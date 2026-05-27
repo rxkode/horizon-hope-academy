@@ -7,16 +7,23 @@ from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text
 from datetime import datetime, timedelta, timezone
-from passlib.context import CryptContext
 from jose import jwt
 from app.db.session import get_db
 from app.core.config import get_settings
+import bcrypt as _bcrypt
 import logging
 
 logger   = logging.getLogger(__name__)
 router   = APIRouter()
-pwd_ctx  = CryptContext(schemes=["bcrypt"], deprecated="auto")
 settings = get_settings()
+
+
+def hash_password(password: str) -> str:
+    return _bcrypt.hashpw(password[:72].encode(), _bcrypt.gensalt()).decode()
+
+
+def verify_password(password: str, hashed: str) -> bool:
+    return _bcrypt.checkpw(password[:72].encode(), hashed.encode())
 
 
 def create_token(data: dict) -> str:
@@ -61,7 +68,7 @@ async def login(
     )
     user = result.fetchone()
 
-    if not user or not pwd_ctx.verify(form.password, user.password_hash):
+    if not user or not verify_password(form.password, user.password_hash):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid email or password"
@@ -148,7 +155,7 @@ async def setup_admin(
     staff_row = staff.fetchone()
     staff_id = staff_row[0] if staff_row else None
 
-    hashed = pwd_ctx.hash(password)
+    hashed = hash_password(password)
     await db.execute(
         text("""
             INSERT INTO hha_users (email, password_hash, role, staff_id)
