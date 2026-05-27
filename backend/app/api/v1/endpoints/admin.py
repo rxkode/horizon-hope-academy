@@ -3,7 +3,7 @@ Admin API endpoints — HHA School Management System.
 JWT-protected. Role-based access control.
 """
 from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordRequestForm
+from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text
 from datetime import datetime, timedelta, timezone
@@ -48,9 +48,14 @@ async def get_current_user(
         raise HTTPException(status_code=401, detail="Invalid or expired token")
 
 
+class LoginRequest(BaseModel):
+    email: str
+    password: str
+
+
 @router.post("/auth/login")
 async def login(
-    form: OAuth2PasswordRequestForm = Depends(),
+    form: LoginRequest,
     db: AsyncSession = Depends(get_db)
 ):
     """Staff login — returns JWT access token."""
@@ -64,7 +69,7 @@ async def login(
             LEFT JOIN hha_staff s ON s.id = u.staff_id
             WHERE u.email = :email
         """),
-        {"email": form.username.lower().strip()}
+        {"email": form.email.lower().strip()}
     )
     user = result.fetchone()
 
