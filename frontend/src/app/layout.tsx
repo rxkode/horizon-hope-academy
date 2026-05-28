@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 
 /**
  * Strip height:  32px  (desktop only — hidden on mobile)
@@ -101,16 +99,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col bg-navy antialiased">
-        <Navbar />
-        {/*
-          Page content starts below the fixed navbar.
-          Mobile:  pt-[64px]  (navbar only)
-          Desktop: pt-[96px]  (contact strip 32px + navbar 64px)
-        */}
-        <main className="flex-1 pt-[64px] md:pt-[96px]">
-          {children}
-        </main>
-        <Footer />
+        {children}
       </body>
     </html>
   );
