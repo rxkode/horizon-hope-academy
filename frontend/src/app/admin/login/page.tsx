@@ -26,7 +26,10 @@ export default function AdminLogin() {
         const data = await res.json();
         localStorage.setItem("hha_admin_token", data.access_token);
         localStorage.setItem("hha_admin_user", JSON.stringify(data.user));
-        router.push("/admin");
+        // Set session cookie for middleware auth guard
+        document.cookie = `hha_session=${data.access_token}; path=/; max-age=86400; SameSite=Strict`;
+        const from = new URLSearchParams(window.location.search).get("from") || "/admin";
+        router.push(from);
       } else {
         setError("Invalid email or password. Please try again.");
       }

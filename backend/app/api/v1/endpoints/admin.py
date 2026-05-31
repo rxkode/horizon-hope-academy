@@ -108,8 +108,47 @@ async def login(
     }
 
 
+async def get_current_admin(
+    authorization: str = "",
+    db: AsyncSession = Depends(get_db)
+) -> dict:
+    """Extract and verify JWT from Authorization header."""
+    from fastapi import Header
+    if not authorization or not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    token = authorization.split(" ", 1)[1]
+    try:
+        payload = jwt.decode(token, settings.secret_key, algorithms=[settings.algorithm])
+        return payload
+    except Exception:
+        raise HTTPException(status_code=401, detail="Invalid or expired token")
+
+
+from fastapi import Header as _Header
+
+async def require_admin(
+    authorization: str = _Header(default=""),
+) -> dict:
+    """Dependency — requires valid JWT with admin or staff role."""
+    if not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Not authenticated")
+    token = authorization.split(" ", 1)[1]
+    try:
+        payload = jwt.decode(token, settings.secret_key, algorithms=[settings.algorithm])
+        if payload.get("role") not in ("admin", "teacher", "staff"):
+            raise HTTPException(status_code=403, detail="Insufficient permissions")
+        return payload
+    except HTTPException:
+        raise
+    except Exception:
+        raise HTTPException(status_code=401, detail="Invalid or expired token")
+
+
 @router.get("/admin/dashboard-stats")
-async def dashboard_stats(db: AsyncSession = Depends(get_db)):
+async def dashboard_stats(
+    db: AsyncSession = Depends(get_db),
+    _user: dict = Depends(require_admin),
+):
     """Dashboard statistics — student count, payments, attendance."""
     today = datetime.now(timezone.utc).date()
 

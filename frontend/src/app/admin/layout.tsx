@@ -35,6 +35,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const logout = () => {
     localStorage.removeItem("hha_admin_token");
     localStorage.removeItem("hha_admin_user");
+    // Clear session cookie
+    document.cookie = "hha_session=; path=/; max-age=0; SameSite=Strict";
     router.push("/admin/login");
   };
 
