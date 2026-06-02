@@ -5,12 +5,38 @@ import Link from "next/link";
 
 interface Class { id: number; name: string; }
 
+interface FormState {
+  first_name: string; middle_name: string; last_name: string;
+  date_of_birth: string; gender: string; class_id: string;
+  nemis_number: string; birth_cert_number: string; medical_notes: string;
+  guardian_name: string; guardian_phone: string; guardian_phone2: string;
+  guardian_email: string; guardian_relationship: string;
+}
+
+/* ── Field component defined OUTSIDE page — prevents remount on keystroke ── */
+function Field({ label, name, type = "text", required = false, placeholder = "", value, onChange }: {
+  label: string; name: string; type?: string; required?: boolean;
+  placeholder?: string; value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}) {
+  return (
+    <div>
+      <label className="block font-sans text-[0.72rem] text-white/50 mb-1.5 uppercase tracking-wider">
+        {label}{required && " *"}
+      </label>
+      <input type={type} name={name} required={required} placeholder={placeholder}
+        value={value} onChange={onChange}
+        className="w-full bg-white/[0.06] border border-white/10 rounded-xl px-4 py-2.5 font-sans text-[0.88rem] text-white placeholder-white/25 focus:outline-none focus:border-gold/40 transition-colors" />
+    </div>
+  );
+}
+
 export default function NewStudentPage() {
   const router = useRouter();
   const [classes, setClasses] = useState<Class[]>([]);
   const [loading, setLoading] = useState(false);
   const [error,   setError]   = useState("");
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<FormState>({
     first_name: "", middle_name: "", last_name: "",
     date_of_birth: "", gender: "", class_id: "",
     nemis_number: "", birth_cert_number: "", medical_notes: "",
@@ -51,19 +77,6 @@ export default function NewStudentPage() {
     } finally { setLoading(false); }
   };
 
-  const Field = ({ label, name, type = "text", required = false, placeholder = "" }: {
-    label: string; name: string; type?: string; required?: boolean; placeholder?: string;
-  }) => (
-    <div>
-      <label className="block font-sans text-[0.72rem] text-white/50 mb-1.5 uppercase tracking-wider">
-        {label}{required && " *"}
-      </label>
-      <input type={type} name={name} required={required} placeholder={placeholder}
-        value={(form as any)[name]} onChange={handle}
-        className="w-full bg-white/[0.06] border border-white/10 rounded-xl px-4 py-2.5 font-sans text-[0.88rem] text-white placeholder-white/25 focus:outline-none focus:border-gold/40 transition-colors" />
-    </div>
-  );
-
   return (
     <div className="max-w-3xl">
       <div className="flex items-center gap-3 mb-6">
@@ -78,13 +91,11 @@ export default function NewStudentPage() {
 
         {/* Student details */}
         <div className="rounded-2xl border border-white/10 p-6" style={{ background: "rgba(255,255,255,0.03)" }}>
-          <h3 className="font-serif text-white font-semibold mb-4 flex items-center gap-2">
-            🎓 Student Information
-          </h3>
+          <h3 className="font-serif text-white font-semibold mb-4">🎓 Student Information</h3>
           <div className="grid sm:grid-cols-3 gap-4 mb-4">
-            <Field label="First Name"  name="first_name"  required placeholder="e.g. Amani" />
-            <Field label="Middle Name" name="middle_name"           placeholder="e.g. Wachira" />
-            <Field label="Last Name"   name="last_name"   required placeholder="e.g. Kamau" />
+            <Field label="First Name"  name="first_name"  required placeholder="e.g. Amani"   value={form.first_name}   onChange={handle} />
+            <Field label="Middle Name" name="middle_name"          placeholder="e.g. Wachira" value={form.middle_name}  onChange={handle} />
+            <Field label="Last Name"   name="last_name"   required placeholder="e.g. Kamau"   value={form.last_name}    onChange={handle} />
           </div>
           <div className="grid sm:grid-cols-3 gap-4 mb-4">
             <div>
@@ -104,21 +115,19 @@ export default function NewStudentPage() {
                 <option value="female">Female</option>
               </select>
             </div>
-            <Field label="Date of Birth" name="date_of_birth" type="date" />
+            <Field label="Date of Birth" name="date_of_birth" type="date" value={form.date_of_birth} onChange={handle} />
           </div>
           <div className="grid sm:grid-cols-2 gap-4">
-            <Field label="NEMIS / UPI Number" name="nemis_number" placeholder="e.g. 12345678" />
-            <Field label="Birth Certificate No" name="birth_cert_number" placeholder="e.g. 1234567" />
+            <Field label="NEMIS / UPI Number"    name="nemis_number"      placeholder="e.g. 12345678" value={form.nemis_number}      onChange={handle} />
+            <Field label="Birth Certificate No"  name="birth_cert_number" placeholder="e.g. 1234567"  value={form.birth_cert_number} onChange={handle} />
           </div>
         </div>
 
         {/* Guardian details */}
         <div className="rounded-2xl border border-white/10 p-6" style={{ background: "rgba(255,255,255,0.03)" }}>
-          <h3 className="font-serif text-white font-semibold mb-4 flex items-center gap-2">
-            👨‍👩‍👧 Parent / Guardian Information
-          </h3>
+          <h3 className="font-serif text-white font-semibold mb-4">👨‍👩‍👧 Parent / Guardian Information</h3>
           <div className="grid sm:grid-cols-2 gap-4 mb-4">
-            <Field label="Guardian Full Name" name="guardian_name" required placeholder="e.g. Jane Wanjiku" />
+            <Field label="Guardian Full Name" name="guardian_name" required placeholder="e.g. Jane Wanjiku" value={form.guardian_name} onChange={handle} />
             <div>
               <label className="block font-sans text-[0.72rem] text-white/50 mb-1.5 uppercase tracking-wider">Relationship *</label>
               <select name="guardian_relationship" value={form.guardian_relationship} onChange={handle}
@@ -132,10 +141,10 @@ export default function NewStudentPage() {
             </div>
           </div>
           <div className="grid sm:grid-cols-2 gap-4 mb-4">
-            <Field label="Primary Phone" name="guardian_phone" required placeholder="+254 7XX XXX XXX" />
-            <Field label="Secondary Phone" name="guardian_phone2" placeholder="+254 7XX XXX XXX" />
+            <Field label="Primary Phone"   name="guardian_phone"  required placeholder="+254 7XX XXX XXX" value={form.guardian_phone}  onChange={handle} />
+            <Field label="Secondary Phone" name="guardian_phone2"          placeholder="+254 7XX XXX XXX" value={form.guardian_phone2} onChange={handle} />
           </div>
-          <Field label="Email Address" name="guardian_email" type="email" placeholder="parent@email.com" />
+          <Field label="Email Address" name="guardian_email" type="email" placeholder="parent@email.com" value={form.guardian_email} onChange={handle} />
         </div>
 
         {/* Medical notes */}
