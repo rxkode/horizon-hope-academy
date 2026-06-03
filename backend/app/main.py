@@ -30,7 +30,7 @@ app = FastAPI(
 
 # ── Security Middleware ───────────────────────────────────────
 # OWASP A05 — Security Misconfiguration: restrict allowed hosts
-app.add_middleware(TrustedHostMiddleware, allowed_hosts=["localhost", "127.0.0.1", "*.vercel.app", "*.onrender.com", "horizon-hope-academy-api.onrender.com"])
+app.add_middleware(TrustedHostMiddleware, allowed_hosts=["localhost", "127.0.0.1", "*.vercel.app", "*.onrender.com", "horizon-hope-academy-api.onrender.com", "*"])
 
 # CORS — only allow our frontend origin
 app.add_middleware(
