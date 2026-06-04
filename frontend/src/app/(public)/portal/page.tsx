@@ -15,7 +15,7 @@ const WA_URL = "https://wa.me/254722777384?text=Hello%2C%20I%20need%20help%20acc
 
 // Update PORTAL_URL when the school gets a public domain/server
 // For now points to local network — staff access on school premises
-const PORTAL_URL = "http://localhost:8080";
+const PORTAL_URL = "https://horizon-hope-academy.vercel.app/admin";
 
 const personas = [
   {

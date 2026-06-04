@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import SectionLabel from "@/components/ui/SectionLabel";
 
-const PORTAL_URL = "http://localhost:8080";
+const PORTAL_URL = "https://horizon-hope-academy.vercel.app/admin";
 
 export default function ParentLoginPage() {
   return (
